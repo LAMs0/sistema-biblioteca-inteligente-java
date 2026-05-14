@@ -1,3 +1,7 @@
+package main.estructuras;
+
+import main.modelo.Libro;
+
 import java.util.LinkedList;
 
 public class TablaHashLibros {
@@ -40,7 +44,7 @@ public class TablaHashLibros {
         }
 
         tabla[indice].add(new Nodo(libro.getIsbn(), libro));
-        System.out.println("Libro agregado correctamente.");
+        System.out.println("main.modelo.Libro agregado correctamente.");
         return true;
     }
 

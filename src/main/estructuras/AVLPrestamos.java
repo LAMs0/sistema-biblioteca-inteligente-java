@@ -1,3 +1,7 @@
+package main.estructuras;
+
+import main.modelo.Libro;
+
 public class AVLPrestamos {
 
     private static class NodoAVL {

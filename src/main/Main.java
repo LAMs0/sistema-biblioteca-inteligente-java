@@ -1,3 +1,10 @@
+package main;
+
+import main.modelo.Libro;
+import main.estructuras.TablaHashLibros;
+import main.estructuras.AVLPrestamos;
+import main.estructuras.TrieTitulos;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -78,7 +85,7 @@ public class Main {
                     Libro encontrado = tablaHash.buscar(buscarIsbn);
 
                     if (encontrado != null) {
-                        System.out.println("Libro encontrado:");
+                        System.out.println("main.modelo.Libro encontrado:");
                         System.out.println(encontrado);
                     } else {
                         System.out.println("No se encontró ningún libro con ese ISBN.");
