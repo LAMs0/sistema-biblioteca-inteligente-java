@@ -2,7 +2,9 @@ package main.estructuras;
 
 import main.modelo.Libro;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class TablaHashLibros {
 
@@ -73,6 +75,18 @@ public class TablaHashLibros {
                 avl.insertar(nodo.libro);
             }
         }
+    }
+
+    public List<Libro> obtenerTodos() {
+        List<Libro> libros = new ArrayList<>();
+
+        for (LinkedList<Nodo> lista : tabla) {
+            for (Nodo nodo : lista) {
+                libros.add(nodo.libro);
+            }
+        }
+
+        return libros;
     }
 }
 
