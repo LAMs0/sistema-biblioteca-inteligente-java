@@ -2,6 +2,9 @@ package main.estructuras;
 
 import main.modelo.Libro;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AVLPrestamos {
 
     private static class NodoAVL {
@@ -92,15 +95,21 @@ public class AVLPrestamos {
         return nodo;
     }
 
-    public void mostrarOrdenado() {
-        mostrarInOrden(raiz);
+    public List<Libro> obtenerOrdenado() {
+        List<Libro> libros = new ArrayList<>();
+        mostrarInOrden(raiz, libros);
+        return libros;
     }
 
-    private void mostrarInOrden(NodoAVL nodo) {
+    private void mostrarInOrden(NodoAVL nodo, List<Libro> libros) {
+
         if (nodo != null) {
-            mostrarInOrden(nodo.izquierda);
-            System.out.println(nodo.libro);
-            mostrarInOrden(nodo.derecha);
+
+            mostrarInOrden(nodo.izquierda, libros);
+
+            libros.add(nodo.libro);
+
+            mostrarInOrden(nodo.derecha, libros);
         }
     }
 }
