@@ -1,4 +1,5 @@
 package main.persistencia;
 
-public class LibroDAO {
+public interface LibroDAO {
+    // Pendiente: métodos CRUD.
 }

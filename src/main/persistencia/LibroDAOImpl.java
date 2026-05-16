@@ -1,4 +1,5 @@
 package main.persistencia;
 
-public class LibroDAOImpl {
+public class LibroDAOImpl implements LibroDAO {
+    // Pendiente: implementación con MySQL.
 }

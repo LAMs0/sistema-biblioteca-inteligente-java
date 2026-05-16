@@ -1,8 +1,9 @@
 package main.servicio;
 
-import main.modelo.Libro;
-import main.estructuras.TablaHashLibros;
 import main.estructuras.AVLPrestamos;
+import main.estructuras.TablaHashLibros;
+import main.estructuras.TrieTitulos;
+import main.modelo.Libro;
 
 import java.util.List;
 
@@ -10,16 +11,14 @@ public class BibliotecaService {
 
     private TablaHashLibros tablaHash;
     private AVLPrestamos avl;
+    private TrieTitulos trie;
 
     public BibliotecaService() {
         tablaHash = new TablaHashLibros(50);
         avl = new AVLPrestamos();
+        trie = new TrieTitulos();
 
         cargarDatosPrueba();
-    }
-
-    public List<Libro> obtenerTodosLosLibros() {
-        return tablaHash.obtenerTodos();
     }
 
     public boolean registrarLibro(
@@ -28,24 +27,23 @@ public class BibliotecaService {
             String autor,
             int anio
     ) {
-
         if (isbn.isEmpty() || titulo.isEmpty() || autor.isEmpty()) {
             return false;
         }
 
         Libro libro = new Libro(isbn, titulo, autor, anio);
 
-        return tablaHash.insertar(libro);
+        boolean agregado = tablaHash.insertar(libro);
+
+        if (agregado) {
+            trie.insertar(titulo);
+        }
+
+        return agregado;
     }
-    private void cargarDatosPrueba() {
 
-        Libro l1 = new Libro("978-1", "Programacion Java", "Deitel", 2020);
-        Libro l2 = new Libro("978-2", "Programacion Web", "Juan Perez", 2021);
-        Libro l3 = new Libro("978-3", "Clean Code", "Robert Martin", 2008);
-
-        tablaHash.insertar(l1);
-        tablaHash.insertar(l2);
-        tablaHash.insertar(l3);
+    public List<Libro> obtenerTodosLosLibros() {
+        return tablaHash.obtenerTodos();
     }
 
     public Libro buscarPorISBN(String isbn) {
@@ -68,6 +66,10 @@ public class BibliotecaService {
         return avl.obtenerOrdenado();
     }
 
+    public List<String> autocompletarTitulos(String prefijo) {
+        return trie.autocompletar(prefijo);
+    }
+
     private void reconstruirAVL() {
         avl = new AVLPrestamos();
 
@@ -76,4 +78,9 @@ public class BibliotecaService {
         }
     }
 
+    private void cargarDatosPrueba() {
+        registrarLibro("978-1", "Programacion Java", "Deitel", 2020);
+        registrarLibro("978-2", "Programacion Web", "Juan Perez", 2021);
+        registrarLibro("978-3", "Clean Code", "Robert Martin", 2008);
+    }
 }
